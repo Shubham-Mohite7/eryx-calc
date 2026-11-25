@@ -1,35 +1,84 @@
-# eryx
+<div align="center">
 
-An offline-first, ad-free Android calculator built with Jetpack Compose and an Apple-inspired **Liquid Glass** aesthetic—featuring translucent frosted surfaces, GPU backdrop blur, solid colors without gradients, custom Canvas vector icons, and spring physics.
+<a href="https://eryx-app-tau.vercel.app/">
+  <img src="assets/banner.svg" alt="eryx — The calculator, refined." width="100%">
+</a>
+
+<br>
+
+<a href="https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk">
+  <img src="assets/download.svg" alt="Download eryx APK" width="320">
+</a>
+
+<br><br>
+
+<img src="https://img.shields.io/badge/version-1.0.6-1C1C1E?style=for-the-badge&labelColor=000000" alt="Version 1.0.6">
+<img src="https://img.shields.io/badge/Android-8.0%2B-1C1C1E?style=for-the-badge&logo=android&logoColor=white&labelColor=000000" alt="Android 8.0 or later">
+<img src="https://img.shields.io/badge/size-2.0%20MB-1C1C1E?style=for-the-badge&labelColor=000000" alt="2.0 MB">
+<img src="https://img.shields.io/badge/ads-0-1C1C1E?style=for-the-badge&labelColor=000000" alt="Zero ads">
+
+<br><br>
+
+**[Website](https://eryx-app-tau.vercel.app/)**  ·  **[Download](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk)**  ·  **[Privacy](https://eryx-app-tau.vercel.app/privacy)**
+
+</div>
+
+<img src="assets/divider.svg" alt="" width="100%">
+
+## What is eryx?
+
+**eryx** is a free Android calculator that stays out of your way. It works fully offline, shows no ads, needs no account and fits in about 2 MB. Under the clean black interface you get a scientific keyboard, function graphing, unit and currency converters, and everyday finance tools like GST and loan EMI.
+
+<img src="assets/stats.svg" alt="12 unit categories, 28 offline currencies, 0 ads ever, 2.0 MB app size" width="100%">
+
+## Screens
+
+<p align="center">
+  <img src="https://eryx-app-tau.vercel.app/assets/standard.webp" alt="Standard mode" width="18%">
+  <img src="https://eryx-app-tau.vercel.app/assets/scientific.webp" alt="Scientific mode" width="18%">
+  <img src="https://eryx-app-tau.vercel.app/assets/graph.webp" alt="Graphing" width="18%">
+  <img src="https://eryx-app-tau.vercel.app/assets/converter.webp" alt="Converter" width="18%">
+  <img src="https://eryx-app-tau.vercel.app/assets/financial.webp" alt="Financial calculators" width="18%">
+</p>
+
+<p align="center"><sub>Standard  ·  Scientific  ·  Graph  ·  Converter  ·  Financial</sub></p>
 
 ## Features
 
-- **Standard & Scientific Modes**: Exact `BigDecimal` (`DECIMAL128`) arithmetic, implicit multiplication, smart percentage handling, `DEG`/`RAD`/`GRAD` angle modes + explicit `°` suffix, `2nd` inverse & hyperbolic trig, logs (`ln`, `log₁₀`, `log₂`), factorials/Gamma, `Ans`, `EXP`, `|x|`, and `MC`/`MR`/`M+`/`M-`/`MS` memory registers.
-- **Interactive 2D Graphing**: Multi-function plotter with pinch-to-zoom, pan, tap-to-trace `(x, y)` coordinates, value table, and parameter sliders (`a`, `b`).
-- **Unit & Currency Converter**: 12 categories (`Length`, `Weight`, `Temperature`, `Currency`, `Area`, `Volume`, `Speed`, `Time`, `Data`, `Energy`, `Pressure`, `Angle`) with 28 offline currencies and optional live ECB exchange rates (`api.frankfurter.app`).
-- **Financial Calculators**: `GST / Tax` (inclusive & exclusive + CGST/SGST), `Loan EMI`, `Discount`, `Percentage`, `Tip & Split`, and `Compound Interest`.
-- **Searchable History & Gestures**: SQLite-backed history with search, date/pinned/favorites filters, swipe-left `[Copy] [Edit] [Delete]` actions, cursor-editable expressions, swipe-left/right Undo/Redo, copy/paste, and sharing.
-- **Ergonomics & Accessibility**: One-handed thumb reachability (`Standard`, `Left Thumb`, `Right Thumb`), Light/Dark/System themes, 5 accent colors, Circular/Rounded key layouts, customizable haptics & synthesized sound click, Text-to-Speech voice results, landscape mode, and a Jetpack Glance home screen widget.
+<table>
+  <tr>
+    <td><img src="assets/card-math.svg" alt="Exact math" width="400"></td>
+    <td><img src="assets/card-graph.svg" alt="Graphing" width="400"></td>
+    <td><img src="assets/card-convert.svg" alt="Converter" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/card-finance.svg" alt="Finance" width="400"></td>
+    <td><img src="assets/card-history.svg" alt="History" width="400"></td>
+    <td><img src="assets/card-private.svg" alt="Private" width="400"></td>
+  </tr>
+</table>
 
-## Build & Install
+Also included: a home screen **widget**, full **offline** operation and **ad-free** use.
 
-```bash
-./gradlew testDebugUnitTest assembleDebug assembleRelease
-```
+<img src="assets/divider.svg" alt="" width="100%">
 
-Prebuilt release APK: [`eryx-v1.0.6.apk`](./eryx-v1.0.6.apk) (Android 8.0+ / API 26+, `2.0 MB`).
+## Install
+
+1. Download the latest APK: **[eryx-v1.0.6.apk](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk)** (2.0 MB).
+2. If your browser warns about APK files, choose **Download anyway**.
+3. Open the downloaded file and allow installs from this source when Android asks.
+4. Launch **eryx** and start calculating.
+
+**Requirements:** Android 8.0 or later.
 
 ## Privacy
 
-`eryx` collects zero analytics, telemetry, or personal data. Read the full policy in [`privacy.md`](./privacy.md).
+eryx has no ads, no tracking and no account. Your calculation history stays on your phone. Currency rates work offline with 28 bundled currencies, and live rates are optional. Read the full [privacy policy](https://eryx-app-tau.vercel.app/privacy).
 
-## Publishing App Updates
+## Feedback
 
-`eryx` includes an in-app updater (**Settings → About & Updates**, plus an optional 12-hour quiet check) that checks both **GitHub Releases** (`releases/latest` with an `.apk` asset) and `update.json` on `main`, downloads the new APK directly, and launches Android's package installer.
+Found a bug or have an idea? [Open an issue](https://github.com/Shubham-Mohite7/eryx-calc/issues). If you like eryx, a ⭐ on this repo helps a lot.
 
-To release a newer version (e.g., `1.0.1`):
-1. Increment `versionCode` and `versionName` in `app/build.gradle.kts` (signed with the **same signing key** as the installed app).
-2. Build the release APK: `./gradlew assembleRelease`.
-3. Either:
-   - **Option A (GitHub Release)**: Create a GitHub Release tagged `v1.0.1` and attach the `.apk` file.
-   - **Option B (`update.json`)**: Commit the new APK and update `versionCode`, `versionName`, `apkUrl`, and `releaseNotes` in `update.json` on `main`.
+<br>
+
+<img src="assets/footer.svg" alt="eryx. Offline. Ad-free. Beautifully simple. Made by Shubham Mohite." width="100%">
