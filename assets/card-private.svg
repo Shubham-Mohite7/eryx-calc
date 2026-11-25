@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" role="img" aria-label="Private: no ads, no tracking, no account. Your history stays on your phone.">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+    .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+    @keyframes ring{0%{transform:scale(.7);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+    @keyframes tick{0%,20%{stroke-dashoffset:40}45%,100%{stroke-dashoffset:0}}
+    .rg{transform-box:fill-box;transform-origin:center;animation:ring 3s ease-out infinite}
+    .rg2{animation-delay:1.5s}
+    .ck{stroke-dasharray:40;animation:tick 3s ease-out infinite}
+  </style>
+  <rect x="0.5" y="0.5" width="399" height="259" rx="24" fill="#000000" stroke="#26262B"/>
+  <text x="28" y="48" font-size="13" letter-spacing="2" font-weight="700" fill="#8E8E93" class="mono">06  ·  PRIVATE</text>
+
+  <g transform="translate(70 118)">
+    <circle r="36" fill="none" stroke="#FFFFFF" stroke-width="2" class="rg"/>
+    <circle r="36" fill="none" stroke="#FFFFFF" stroke-width="2" class="rg rg2"/>
+    <path d="M0 -30 L26 -20 V4 C26 20 14 31 0 36 C-14 31 -26 20 -26 4 V-20 Z" fill="#121214" stroke="url(#acc)" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M-11 3 L-3 11 L12 -7" fill="none" stroke="#F5F5F7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="ck"/>
+  </g>
+
+  <g class="mono" font-size="16" font-weight="700" fill="#F5F5F7">
+    <text x="150" y="98"><tspan fill="#FFFFFF">0</tspan>  ads</text>
+    <text x="150" y="124"><tspan fill="#FFFFFF">0</tspan>  tracking</text>
+    <text x="150" y="150"><tspan fill="#FFFFFF">0</tspan>  accounts</text>
+  </g>
+
+  <line x1="28" y1="172" x2="372" y2="172" stroke="#1F1F23"/>
+  <text x="28" y="204" font-size="22" font-weight="700" fill="#F5F5F7" class="sans">Private</text>
+  <text x="28" y="228" font-size="14" fill="#8E8E93" class="sans">No ads, no tracking, no account. Your</text>
+  <text x="28" y="246" font-size="14" fill="#8E8E93" class="sans">history stays on your phone.</text>
+</svg>

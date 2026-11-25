@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="140" viewBox="0 0 1280 140" role="img" aria-label="eryx. Offline. Ad-free. Beautifully simple. Made by Shubham Mohite.">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="1" r="0.7">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="round"><rect width="1280" height="140" rx="28"/></clipPath>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+    .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+    @keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+    .bar{transform-box:fill-box;transform-origin:center bottom;animation:eq 2.4s ease-in-out infinite}
+  </style>
+  <g clip-path="url(#round)">
+    <rect width="1280" height="140" fill="#000"/>
+    <g fill="url(#acc)" opacity="0.5">
+      <rect class="bar" x="40"  y="70" width="6" height="60" rx="3" style="animation-delay:0s"/>
+      <rect class="bar" x="58"  y="70" width="6" height="60" rx="3" style="animation-delay:.2s"/>
+      <rect class="bar" x="76"  y="70" width="6" height="60" rx="3" style="animation-delay:.4s"/>
+      <rect class="bar" x="94"  y="70" width="6" height="60" rx="3" style="animation-delay:.6s"/>
+      <rect class="bar" x="112" y="70" width="6" height="60" rx="3" style="animation-delay:.8s"/>
+      <rect class="bar" x="1162" y="70" width="6" height="60" rx="3" style="animation-delay:.8s"/>
+      <rect class="bar" x="1180" y="70" width="6" height="60" rx="3" style="animation-delay:.6s"/>
+      <rect class="bar" x="1198" y="70" width="6" height="60" rx="3" style="animation-delay:.4s"/>
+      <rect class="bar" x="1216" y="70" width="6" height="60" rx="3" style="animation-delay:.2s"/>
+      <rect class="bar" x="1234" y="70" width="6" height="60" rx="3" style="animation-delay:0s"/>
+    </g>
+  </g>
+  <rect x="0.5" y="0.5" width="1279" height="139" rx="27.5" fill="none" stroke="#26262B"/>
+  <text x="640" y="62" text-anchor="middle" font-size="34" font-weight="800" fill="#F5F5F7" class="sans">eryx<tspan fill="#FFFFFF">.</tspan></text>
+  <text x="640" y="92" text-anchor="middle" font-size="16" fill="#8E8E93" class="sans">Offline. Ad-free. Beautifully simple.</text>
+  <text x="640" y="116" text-anchor="middle" font-size="12" letter-spacing="2" fill="#5E5E64" class="mono">MADE BY SHUBHAM MOHITE</text>
+</svg>

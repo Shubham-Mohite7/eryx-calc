@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" role="img" aria-label="Finance: GST with CGST and SGST split, loan EMI, discount, tip and compound interest">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+    .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+    @keyframes grow{0%{transform:scaleX(0)}30%,85%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+    @keyframes show{0%,25%{opacity:0}40%,85%{opacity:1}100%{opacity:0}}
+    .b1{transform-box:fill-box;transform-origin:left center;animation:grow 6s ease-out infinite}
+    .b2{transform-box:fill-box;transform-origin:left center;animation:grow 6s .2s ease-out infinite}
+    .t{animation:show 6s infinite both}
+  </style>
+  <rect x="0.5" y="0.5" width="399" height="259" rx="24" fill="#000000" stroke="#26262B"/>
+  <text x="28" y="48" font-size="13" letter-spacing="2" font-weight="700" fill="#8E8E93" class="mono">04  ·  FINANCE</text>
+
+  <text x="28" y="86" font-size="14" fill="#8E8E93" class="mono">₹1,000  +  18% GST  =  ₹180</text>
+
+  <rect x="28" y="100" width="344" height="16" rx="8" fill="#151518"/>
+  <rect x="28" y="100" width="170" height="16" rx="8" fill="url(#acc)" class="b1"/>
+  <rect x="202" y="100" width="170" height="16" rx="8" fill="#3A3A3C" class="b2"/>
+
+  <g class="mono t" font-size="14">
+    <text x="28" y="140" fill="#FFFFFF">CGST 9%</text><text x="28" y="158" fill="#F5F5F7" font-weight="700">₹90</text>
+    <text x="372" y="140" text-anchor="end" fill="#C7C7CC">SGST 9%</text><text x="372" y="158" text-anchor="end" fill="#F5F5F7" font-weight="700">₹90</text>
+  </g>
+
+  <line x1="28" y1="172" x2="372" y2="172" stroke="#1F1F23"/>
+  <text x="28" y="204" font-size="22" font-weight="700" fill="#F5F5F7" class="sans">Finance</text>
+  <text x="28" y="228" font-size="14" fill="#8E8E93" class="sans">GST (CGST + SGST), loan EMI, discount,</text>
+  <text x="28" y="246" font-size="14" fill="#8E8E93" class="sans">tip and compound interest.</text>
+</svg>

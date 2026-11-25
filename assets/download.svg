@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="84" viewBox="0 0 420 84" role="img" aria-label="Download eryx APK, version 1.0.6, 2.0 MB, Android 8.0 or later">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#000" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="btn"><rect x="2" y="2" width="416" height="80" rx="40"/></clipPath>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+    @keyframes shine{0%{transform:translateX(-120px)}55%,100%{transform:translateX(520px)}}
+    @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+    .sh{animation:shine 3.2s ease-in-out infinite}
+    .ar{animation:bob 1.4s ease-in-out infinite}
+  </style>
+  <rect x="2" y="2" width="416" height="80" rx="40" fill="url(#acc)"/>
+  <g clip-path="url(#btn)"><rect x="0" y="0" width="90" height="84" fill="url(#shine)" transform="skewX(-20)" class="sh"/></g>
+  <g class="ar"><path d="M52 30 v22 M42 43 l10 10 10 -10" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <path d="M40 62 h24" stroke="#000000" stroke-width="4" stroke-linecap="round"/>
+  <text x="90" y="39" font-size="24" font-weight="800" fill="#000000" class="sans">Download APK</text>
+  <text x="90" y="62" font-size="14" font-weight="600" fill="#000000" fill-opacity="0.75" class="sans">v1.0.6  ·  2.0 MB  ·  Android 8.0+</text>
+</svg>

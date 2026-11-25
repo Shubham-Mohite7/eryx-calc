@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="170" viewBox="0 0 1280 170" role="img" aria-label="12 unit categories, 28 offline currencies, 0 ads ever, 2.0 MB app size">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient>
+  </defs>
+  <style>
+    .sans{font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+    .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+    @keyframes rise{0%{opacity:0;transform:translateY(14px)}12%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+    @keyframes bar{0%{transform:scaleX(0)}15%,88%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+    .n{animation:rise 8s infinite both}
+    .u{transform-box:fill-box;transform-origin:left center;animation:bar 8s infinite both}
+  </style>
+  <rect x="0.5" y="0.5" width="1279" height="169" rx="28" fill="#000000" stroke="#26262B"/>
+
+  <g text-anchor="middle">
+    <g class="n">
+      <text x="160" y="92" font-size="68" font-weight="800" fill="#F5F5F7" class="sans">12</text>
+      <rect x="130" y="108" width="60" height="4" rx="2" fill="url(#acc)" class="u"/>
+      <text x="160" y="140" font-size="14" letter-spacing="2" fill="#8E8E93" class="mono">UNIT CATEGORIES</text>
+    </g>
+    <g class="n" style="animation-delay:.15s">
+      <text x="480" y="92" font-size="68" font-weight="800" fill="#F5F5F7" class="sans">28</text>
+      <rect x="450" y="108" width="60" height="4" rx="2" fill="url(#acc)" class="u" style="animation-delay:.15s"/>
+      <text x="480" y="140" font-size="14" letter-spacing="2" fill="#8E8E93" class="mono">OFFLINE CURRENCIES</text>
+    </g>
+    <g class="n" style="animation-delay:.3s">
+      <text x="800" y="92" font-size="68" font-weight="800" fill="#F5F5F7" class="sans">0</text>
+      <rect x="770" y="108" width="60" height="4" rx="2" fill="url(#acc)" class="u" style="animation-delay:.3s"/>
+      <text x="800" y="140" font-size="14" letter-spacing="2" fill="#8E8E93" class="mono">ADS, EVER</text>
+    </g>
+    <g class="n" style="animation-delay:.45s">
+      <text x="1120" y="92" font-size="68" font-weight="800" fill="#F5F5F7" class="sans">2.0<tspan font-size="30" fill="#8E8E93" dx="6">MB</tspan></text>
+      <rect x="1090" y="108" width="60" height="4" rx="2" fill="url(#acc)" class="u" style="animation-delay:.45s"/>
+      <text x="1120" y="140" font-size="14" letter-spacing="2" fill="#8E8E93" class="mono">APP SIZE</text>
+    </g>
+  </g>
+
+  <g stroke="#1F1F23"><line x1="320" y1="40" x2="320" y2="130"/><line x1="640" y1="40" x2="640" y2="130"/><line x1="960" y1="40" x2="960" y2="130"/></g>
+</svg>
