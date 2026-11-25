@@ -141,62 +141,62 @@ fun LiquidGlassTheme(
     } else {
         GlassPalette(
             isDark = true,
-            backgroundBase = Color(0xFF101216),
-            backdropBlobA = Color(0x33353E4D),
-            backdropBlobB = Color(0x28232933),
-            backdropBlobC = Color(0x243B4554),
+            backgroundBase = Color(0xFF000000),
+            backdropBlobA = Color.Transparent,
+            backdropBlobB = Color.Transparent,
+            backdropBlobC = Color.Transparent,
             cardSurface = when {
-                hc -> Color(0xFF1B1F26)
-                translucent -> Color(0x9920242C)
-                else -> Color(0xFF1C2027)
+                hc -> Color(0xFF0D0E10)
+                translucent -> Color(0xCC0B0C0F)
+                else -> Color(0xFF0A0B0D)
             },
             displaySurface = when {
-                hc -> Color(0xFF1E222A)
-                translucent -> Color(0xB3222730)
-                else -> Color(0xFF1F242C)
+                hc -> Color(0xFF08090B)
+                translucent -> Color(0xD907080A)
+                else -> Color(0xFF07080A)
             },
             keySurface = when {
-                hc -> Color(0xFF262B35)
-                translucent -> Color(0xA6282D37)
-                else -> Color(0xFF252A33)
+                hc -> Color(0xFF15171B)
+                translucent -> Color(0xD9111216)
+                else -> Color(0xFF111215)
             },
-            keyPressedSurface = Color(0xCC3A414E),
+            keyPressedSurface = Color(0xFF252830),
             operatorKeySurface = when {
-                hc -> Color(0xFF473319)
-                translucent -> Color(0x2EFF9F0A)
-                else -> Color(0xFF362A1B)
+                hc -> Color(0xFF3D290F)
+                translucent -> Color(0x2CFF9F0A)
+                else -> Color(0xFF2B1D0B)
             },
-            operatorKeyBorder = if (hc) Color(0xFFFFB340) else Color(0x4DFF9F0A),
-            operatorKeyText = Color(0xFFFFAB2E),
+            operatorKeyBorder = if (hc) Color(0xFFFFB340) else Color(0x55FF9F0A),
+            operatorKeyText = Color(0xFFFFAD33),
             clearKeySurface = when {
-                hc -> Color(0xFF4D1E1E)
-                translucent -> Color(0x2EFF453A)
-                else -> Color(0xFF381E20)
+                hc -> Color(0xFF421515)
+                translucent -> Color(0x2CFF453A)
+                else -> Color(0xFF2E1214)
             },
-            clearKeyBorder = if (hc) Color(0xFFFF6961) else Color(0x4DFF453A),
+            clearKeyBorder = if (hc) Color(0xFFFF6961) else Color(0x55FF453A),
             clearKeyText = Color(0xFFFF6961),
             secondaryKeySurface = when {
-                hc -> Color(0xFF2D333E)
-                translucent -> Color(0x992A303B)
-                else -> Color(0xFF272C36)
+                hc -> Color(0xFF1C1F25)
+                translucent -> Color(0xD917191E)
+                else -> Color(0xFF16181D)
             },
-            pillContainerSurface = if (translucent) Color(0x881B1F26) else Color(0xFF1C2027),
-            activePillSurface = if (translucent) Color(0xCC303744) else Color(0xFF2F3642),
-            modalSurface = if (translucent) Color(0xEB1B1F27) else Color(0xFF1B1F27),
-            glassBorder = if (hc) Color(0xCCFFFFFF) else Color(0x26FFFFFF),
-            subtleDivider = Color(0x22FFFFFF),
-            textPrimary = Color(0xFFF5F7FA),
-            textSecondary = if (hc) Color(0xFFD8DEE8) else Color(0xFFA0A9B6),
-            textMuted = Color(0xFF77808E),
+            pillContainerSurface = Color(0xFF0B0C0F),
+            activePillSurface = Color(0xFF1B1D24),
+            modalSurface = Color(0xF50A0B0E),
+            glassBorder = if (hc) Color(0xD9FFFFFF) else Color(0x2BFFFFFF),
+            subtleDivider = Color(0x24FFFFFF),
+            textPrimary = Color(0xFFFFFFFF),
+            textSecondary = if (hc) Color(0xFFE0E4EC) else Color(0xFF9EA6B2),
+            textMuted = Color(0xFF707885),
             accent = accent,
             onAccent = onAccent,
-            danger = Color(0xFFEF5350),
+            danger = Color(0xFFFF5252),
             switchTrackOn = accent,
-            switchTrackOff = Color(0xFF39404C),
+            switchTrackOff = Color(0xFF2B2E36),
             switchThumb = Color.White,
             textScale = settings.textScale,
             isCircularKeys = settings.calculatorLayout == CalculatorLayoutStyle.CIRCULAR,
-            blurEnabled = translucent
+            blurEnabled = false
         )
     }
 

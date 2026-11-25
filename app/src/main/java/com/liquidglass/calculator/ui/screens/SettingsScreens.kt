@@ -276,12 +276,12 @@ fun AppearanceSettingsScreen(
 private fun ThemeMiniPreview(mode: ThemeMode) {
     val bg = when (mode) {
         ThemeMode.LIGHT -> Color(0xFFEDF1F5)
-        ThemeMode.DARK -> Color(0xFF1A1E24)
+        ThemeMode.DARK -> Color(0xFF000000)
         ThemeMode.SYSTEM -> Color(0xFF8A94A3)
     }
     val card = when (mode) {
         ThemeMode.LIGHT -> Color.White
-        ThemeMode.DARK -> Color(0xFF292F38)
+        ThemeMode.DARK -> Color(0xFF14161A)
         ThemeMode.SYSTEM -> Color(0xFFD0D7DF)
     }
     Box(
