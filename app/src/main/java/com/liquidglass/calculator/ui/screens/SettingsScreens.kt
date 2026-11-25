@@ -46,6 +46,7 @@ import com.liquidglass.calculator.data.HapticStrength
 import com.liquidglass.calculator.data.MemoryBehavior
 import com.liquidglass.calculator.data.OneHandedMode
 import com.liquidglass.calculator.data.ThemeMode
+import com.liquidglass.calculator.data.UpdateStatus
 import com.liquidglass.calculator.engine.AngleMode
 import com.liquidglass.calculator.engine.DecimalPrecisionMode
 import com.liquidglass.calculator.ui.components.GlassCard
@@ -67,6 +68,7 @@ import kotlin.math.roundToInt
 @Composable
 fun SettingsMainScreen(
     settings: AppSettings,
+    updateStatus: UpdateStatus,
     onNavigate: (AppDestination) -> Unit,
     onBack: () -> Unit
 ) {
@@ -115,9 +117,14 @@ fun SettingsMainScreen(
                 badgeText = "A+"
             ) { onNavigate(AppDestination.SETTINGS_ACCESSIBILITY) }
 
+            val aboutSubtitle = when (updateStatus) {
+                is UpdateStatus.Available -> "Update v${updateStatus.info.versionName} available"
+                is UpdateStatus.ReadyToInstall -> "Update ready to install"
+                else -> "Offline-first • v${BuildConfig.VERSION_NAME} • Check updates"
+            }
             SettingsNavRow(
-                title = "About",
-                subtitle = "Offline-first • v${BuildConfig.VERSION_NAME}",
+                title = "About & Updates",
+                subtitle = aboutSubtitle,
                 badgeText = "i"
             ) { onNavigate(AppDestination.SETTINGS_ABOUT) }
         }
@@ -736,14 +743,20 @@ fun AccessibilitySettingsScreen(
 }
 
 @Composable
-fun AboutSettingsScreen(onBack: () -> Unit) {
+fun AboutSettingsScreen(
+    settings: AppSettings,
+    updateStatus: UpdateStatus,
+    viewModel: CalculatorViewModel,
+    onBack: () -> Unit
+) {
     val p = LocalGlassPalette.current
+    val context = androidx.compose.ui.platform.LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
-        GlassSubpageTopBar(title = "About", onBack = onBack)
+        GlassSubpageTopBar(title = "About & Updates", onBack = onBack)
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -768,6 +781,80 @@ fun AboutSettingsScreen(onBack: () -> Unit) {
                     Spacer(modifier = Modifier.height(12.dp))
                     GlassText("eryx", fontSizeSp = 22f, fontWeight = FontWeight.Bold)
                     GlassText("Version ${BuildConfig.VERSION_NAME} • Liquid Glass Edition", color = p.textSecondary, fontSizeSp = 13.5f)
+                }
+            }
+
+            // Software Update Card
+            GlassCard(shape = RoundedCornerShape(22.dp)) {
+                Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    GlassText("Software Updates", fontSizeSp = 15.5f, fontWeight = FontWeight.SemiBold)
+                    val statusText = when (updateStatus) {
+                        UpdateStatus.Idle -> "Check GitHub releases for new eryx versions."
+                        UpdateStatus.Checking -> "Checking for updates..."
+                        is UpdateStatus.UpToDate -> "You're on the latest version (v${BuildConfig.VERSION_NAME})."
+                        is UpdateStatus.Available -> "Version ${updateStatus.info.versionName} is available!\n${updateStatus.info.releaseNotes}"
+                        is UpdateStatus.Downloading -> "Downloading v${updateStatus.info.versionName} (${(updateStatus.progress * 100).toInt()}%)..."
+                        is UpdateStatus.ReadyToInstall -> "v${updateStatus.info.versionName} downloaded and ready to install."
+                        is UpdateStatus.Error -> updateStatus.message
+                    }
+                    GlassText(statusText, color = p.textSecondary, fontSizeSp = 13.5f)
+
+                    if (updateStatus is UpdateStatus.Downloading) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(6.dp)
+                                .clip(RoundedCornerShape(999.dp))
+                                .background(p.switchTrackOff)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth(updateStatus.progress.coerceIn(0.05f, 1f))
+                                    .height(6.dp)
+                                    .clip(RoundedCornerShape(999.dp))
+                                    .background(p.accent)
+                            )
+                        }
+                    }
+
+                    val btnLabel = when (updateStatus) {
+                        UpdateStatus.Checking -> "Checking..."
+                        is UpdateStatus.Available -> "Download & Install v${updateStatus.info.versionName}"
+                        is UpdateStatus.Downloading -> "Downloading ${(updateStatus.progress * 100).toInt()}%"
+                        is UpdateStatus.ReadyToInstall -> "Install Update Now"
+                        else -> "Check for Updates"
+                    }
+                    val enabled = updateStatus !is UpdateStatus.Checking && updateStatus !is UpdateStatus.Downloading
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(44.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(if (enabled) p.accent else p.secondaryKeySurface)
+                            .clickable(enabled = enabled) {
+                                when (updateStatus) {
+                                    is UpdateStatus.Available -> viewModel.downloadAndInstallUpdate(context)
+                                    is UpdateStatus.ReadyToInstall -> viewModel.installReadyApk(context)
+                                    else -> viewModel.checkForUpdates(manual = true)
+                                }
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        GlassText(
+                            text = btnLabel,
+                            color = if (enabled) p.onAccent else p.textSecondary,
+                            fontSizeSp = 14.5f,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+
+                    SettingsDivider()
+                    SettingsSwitchRow(
+                        title = "Auto-check for Updates",
+                        subtitle = "Quietly check GitHub releases once every 12h",
+                        checked = settings.autoCheckUpdates,
+                        onCheckedChange = viewModel::setAutoCheckUpdates
+                    )
                 }
             }
 

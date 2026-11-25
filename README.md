@@ -18,3 +18,14 @@ An offline-first, ad-free Android calculator built with Jetpack Compose and an A
 ```
 
 Prebuilt release APK: [`eryx-v1.0.0.apk`](./eryx-v1.0.0.apk) (Android 8.0+ / API 26+, `1.9 MB`).
+
+## Publishing App Updates
+
+`eryx` includes an in-app updater (**Settings → About & Updates**, plus an optional 12-hour quiet check) that checks both **GitHub Releases** (`releases/latest` with an `.apk` asset) and `update.json` on `main`, downloads the new APK directly, and launches Android's package installer.
+
+To release a newer version (e.g., `1.0.1`):
+1. Increment `versionCode` and `versionName` in `app/build.gradle.kts` (signed with the **same signing key** as the installed app).
+2. Build the release APK: `./gradlew assembleRelease`.
+3. Either:
+   - **Option A (GitHub Release)**: Create a GitHub Release tagged `v1.0.1` and attach the `.apk` file.
+   - **Option B (`update.json`)**: Commit the new APK and update `versionCode`, `versionName`, `apkUrl`, and `releaseNotes` in `update.json` on `main`.

@@ -4,6 +4,7 @@ import android.app.Application
 import com.liquidglass.calculator.data.CurrencyRepository
 import com.liquidglass.calculator.data.HistoryDatabase
 import com.liquidglass.calculator.data.SettingsRepository
+import com.liquidglass.calculator.data.UpdateRepository
 import com.liquidglass.calculator.util.FeedbackManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,8 @@ class CalculatorApplication : Application() {
         private set
     lateinit var currencyRepository: CurrencyRepository
         private set
+    lateinit var updateRepository: UpdateRepository
+        private set
     lateinit var feedbackManager: FeedbackManager
         private set
 
@@ -27,6 +30,7 @@ class CalculatorApplication : Application() {
         settingsRepository = SettingsRepository(this)
         historyDatabase = HistoryDatabase(this)
         currencyRepository = CurrencyRepository(settingsRepository)
+        updateRepository = UpdateRepository(this)
         feedbackManager = FeedbackManager(this)
 
         applicationScope.launch {

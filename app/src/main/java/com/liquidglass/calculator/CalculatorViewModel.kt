@@ -22,6 +22,7 @@ import com.liquidglass.calculator.data.HistoryItem
 import com.liquidglass.calculator.data.MemoryBehavior
 import com.liquidglass.calculator.data.OneHandedMode
 import com.liquidglass.calculator.data.ThemeMode
+import com.liquidglass.calculator.data.UpdateStatus
 import com.liquidglass.calculator.engine.AngleMode
 import com.liquidglass.calculator.engine.DecimalPrecisionMode
 import com.liquidglass.calculator.engine.EvalResult
@@ -84,6 +85,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     private val settingsRepo = app.settingsRepository
     private val historyDb = app.historyDatabase
     private val currencyRepo = app.currencyRepository
+    private val updateRepo = app.updateRepository
     private val feedback = app.feedbackManager
 
     val settings: StateFlow<AppSettings> = settingsRepo.settingsFlow
@@ -117,6 +119,12 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
 
     private val _historyFilter = MutableStateFlow(HistoryFilter.ALL)
     val historyFilter: StateFlow<HistoryFilter> = _historyFilter.asStateFlow()
+
+    private val _updateStatus = MutableStateFlow<UpdateStatus>(UpdateStatus.Idle)
+    val updateStatus: StateFlow<UpdateStatus> = _updateStatus.asStateFlow()
+
+    private val _showUpdateDialog = MutableStateFlow(false)
+    val showUpdateDialog: StateFlow<Boolean> = _showUpdateDialog.asStateFlow()
 
     private val undoStack = ArrayDeque<TextFieldValue>()
     private val redoStack = ArrayDeque<TextFieldValue>()
@@ -174,6 +182,14 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             settings.collectLatest {
                 evaluateLive(_calcState.value.expressionField.text)
                 recomputeConversion()
+            }
+        }
+        // Quiet periodic update check (max once per 12h when enabled)
+        viewModelScope.launch {
+            val s = settingsRepo.settingsFlow.stateIn(viewModelScope).value
+            val twelveHoursMs = 12L * 3600L * 1000L
+            if (s.autoCheckUpdates && System.currentTimeMillis() - s.lastUpdateCheckMillis > twelveHoursMs) {
+                checkForUpdates(manual = false)
             }
         }
     }
@@ -824,6 +840,74 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     fun setHighContrast(enabled: Boolean) = updateSettings { it.copy(highContrast = enabled) }
     fun setButtonLabels(enabled: Boolean) = updateSettings { it.copy(buttonLabels = enabled) }
     fun setVoiceResults(enabled: Boolean) = updateSettings { it.copy(voiceResults = enabled) }
+    fun setAutoCheckUpdates(enabled: Boolean) = updateSettings { it.copy(autoCheckUpdates = enabled) }
+
+    // ---- In-App Updates ----
+
+    fun checkForUpdates(manual: Boolean = true) {
+        if (_updateStatus.value is UpdateStatus.Checking || _updateStatus.value is UpdateStatus.Downloading) return
+        viewModelScope.launch {
+            _updateStatus.value = UpdateStatus.Checking
+            val res = updateRepo.checkForUpdate(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME)
+            val now = System.currentTimeMillis()
+            settingsRepo.update { it.copy(lastUpdateCheckMillis = now) }
+            res.fold(
+                onSuccess = { info ->
+                    if (info != null) {
+                        _updateStatus.value = UpdateStatus.Available(info)
+                        _showUpdateDialog.value = true
+                    } else {
+                        _updateStatus.value = UpdateStatus.UpToDate(now)
+                        if (manual) showToast("eryx is up to date (v${BuildConfig.VERSION_NAME})")
+                    }
+                },
+                onFailure = { err ->
+                    _updateStatus.value = UpdateStatus.Error(
+                        err.message ?: "Unable to check updates offline"
+                    )
+                    if (manual) showToast("Check failed — verify internet connection")
+                }
+            )
+        }
+    }
+
+    fun downloadAndInstallUpdate(context: Context) {
+        val info = when (val st = _updateStatus.value) {
+            is UpdateStatus.Available -> st.info
+            is UpdateStatus.Error -> return
+            else -> return
+        }
+        viewModelScope.launch {
+            _updateStatus.value = UpdateStatus.Downloading(info, 0f)
+            val result = updateRepo.downloadApk(info) { prog ->
+                _updateStatus.value = UpdateStatus.Downloading(info, prog)
+            }
+            result.fold(
+                onSuccess = { apkFile ->
+                    _updateStatus.value = UpdateStatus.ReadyToInstall(info, apkFile)
+                    installReadyApk(context)
+                },
+                onFailure = { err ->
+                    _updateStatus.value = UpdateStatus.Error(err.message ?: "Download failed")
+                    showToast("Update download failed")
+                }
+            )
+        }
+    }
+
+    fun installReadyApk(context: Context) {
+        val ready = _updateStatus.value as? UpdateStatus.ReadyToInstall ?: return
+        if (updateRepo.needsInstallPermission()) {
+            showToast("Allow 'Install unknown apps' for eryx, then tap Install")
+            updateRepo.openInstallPermissionSettings(context)
+        } else {
+            updateRepo.launchApkInstaller(context, ready.apkFile)
+        }
+    }
+
+    fun dismissUpdateDialog() {
+        _showUpdateDialog.value = false
+    }
 
     private fun updateSettings(block: (AppSettings) -> AppSettings) {
         viewModelScope.launch { settingsRepo.update(block) }

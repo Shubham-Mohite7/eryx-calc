@@ -46,6 +46,8 @@ class SettingsRepository(private val context: Context) {
         val LAST_ANSWER = stringPreferencesKey("last_answer")
         val CURRENCY_RATES_JSON = stringPreferencesKey("currency_rates_json")
         val CURRENCY_UPDATED_AT = longPreferencesKey("currency_updated_at")
+        val AUTO_CHECK_UPDATES = booleanPreferencesKey("auto_check_updates")
+        val LAST_UPDATE_CHECK = longPreferencesKey("last_update_check")
     }
 
     val settingsFlow: Flow<AppSettings> = context.settingsDataStore.data.map { prefs ->
@@ -77,7 +79,9 @@ class SettingsRepository(private val context: Context) {
                 ?.split("|")
                 ?.filter { it.isNotBlank() }
                 ?: emptyList(),
-            lastAnswer = prefs[Keys.LAST_ANSWER] ?: "0"
+            lastAnswer = prefs[Keys.LAST_ANSWER] ?: "0",
+            autoCheckUpdates = prefs[Keys.AUTO_CHECK_UPDATES] ?: true,
+            lastUpdateCheckMillis = prefs[Keys.LAST_UPDATE_CHECK] ?: 0L
         )
     }
 
@@ -112,7 +116,9 @@ class SettingsRepository(private val context: Context) {
                 lastMode = enumOrDefault(prefs[Keys.LAST_MODE], CalculatorMode.STANDARD),
                 memoryValue = prefs[Keys.MEMORY_VALUE] ?: "0",
                 memorySlots = prefs[Keys.MEMORY_SLOTS]?.split("|")?.filter { it.isNotBlank() } ?: emptyList(),
-                lastAnswer = prefs[Keys.LAST_ANSWER] ?: "0"
+                lastAnswer = prefs[Keys.LAST_ANSWER] ?: "0",
+                autoCheckUpdates = prefs[Keys.AUTO_CHECK_UPDATES] ?: true,
+                lastUpdateCheckMillis = prefs[Keys.LAST_UPDATE_CHECK] ?: 0L
             )
             val updated = transform(current)
             prefs[Keys.THEME_MODE] = updated.themeMode.name
@@ -140,6 +146,8 @@ class SettingsRepository(private val context: Context) {
             prefs[Keys.MEMORY_VALUE] = updated.memoryValue
             prefs[Keys.MEMORY_SLOTS] = updated.memorySlots.joinToString("|")
             prefs[Keys.LAST_ANSWER] = updated.lastAnswer
+            prefs[Keys.AUTO_CHECK_UPDATES] = updated.autoCheckUpdates
+            prefs[Keys.LAST_UPDATE_CHECK] = updated.lastUpdateCheckMillis
         }
     }
 

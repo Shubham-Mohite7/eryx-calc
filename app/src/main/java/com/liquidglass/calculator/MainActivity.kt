@@ -15,10 +15,17 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,12 +34,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.liquidglass.calculator.data.ThemeMode
+import com.liquidglass.calculator.data.UpdateStatus
+import com.liquidglass.calculator.ui.components.GlassCard
+import com.liquidglass.calculator.ui.components.GlassModalCardDialog
 import com.liquidglass.calculator.ui.components.GlassText
 import com.liquidglass.calculator.ui.components.LiquidGlassBackground
 import com.liquidglass.calculator.ui.screens.AboutSettingsScreen
@@ -97,6 +108,9 @@ private fun CalculatorRoot(viewModel: CalculatorViewModel) {
     val historyFilter by viewModel.historyFilter.collectAsStateWithLifecycle()
     val graphFunctions by viewModel.graphFunctions.collectAsStateWithLifecycle()
     val selectedFinancial by viewModel.selectedFinancialTool.collectAsStateWithLifecycle()
+    val updateStatus by viewModel.updateStatus.collectAsStateWithLifecycle()
+    val showUpdateDialog by viewModel.showUpdateDialog.collectAsStateWithLifecycle()
+    val context = LocalContext.current
 
     BackHandler(enabled = destination != AppDestination.CALCULATOR) {
         viewModel.navigateBack()
@@ -169,6 +183,7 @@ private fun CalculatorRoot(viewModel: CalculatorViewModel) {
 
                 AppDestination.SETTINGS -> SettingsMainScreen(
                     settings = settings,
+                    updateStatus = updateStatus,
                     onNavigate = viewModel::navigateTo,
                     onBack = { viewModel.navigateBack() }
                 )
@@ -204,8 +219,93 @@ private fun CalculatorRoot(viewModel: CalculatorViewModel) {
                 )
 
                 AppDestination.SETTINGS_ABOUT -> AboutSettingsScreen(
+                    settings = settings,
+                    updateStatus = updateStatus,
+                    viewModel = viewModel,
                     onBack = { viewModel.navigateBack() }
                 )
+            }
+        }
+
+        // In-App Update Modal
+        if (showUpdateDialog) {
+            val p = LocalGlassPalette.current
+            when (val st = updateStatus) {
+                is UpdateStatus.Available,
+                is UpdateStatus.Downloading,
+                is UpdateStatus.ReadyToInstall -> {
+                    val info = when (st) {
+                        is UpdateStatus.Available -> st.info
+                        is UpdateStatus.Downloading -> st.info
+                        is UpdateStatus.ReadyToInstall -> st.info
+                        else -> null
+                    }
+                    if (info != null) {
+                        GlassModalCardDialog(onDismiss = viewModel::dismissUpdateDialog) {
+                            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                                GlassText("Update Available • v${info.versionName}", fontSizeSp = 18f, fontWeight = FontWeight.SemiBold)
+                                GlassText(info.releaseNotes, color = p.textSecondary, fontSizeSp = 13.5f)
+                                if (st is UpdateStatus.Downloading) {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(6.dp)
+                                            .clip(RoundedCornerShape(999.dp))
+                                            .background(p.switchTrackOff)
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxWidth(st.progress.coerceIn(0.05f, 1f))
+                                                .height(6.dp)
+                                                .clip(RoundedCornerShape(999.dp))
+                                                .background(p.accent)
+                                        )
+                                    }
+                                    GlassText("Downloading ${(st.progress * 100).toInt()}%...", color = p.textSecondary, fontSizeSp = 12.5f)
+                                }
+                                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                    GlassCard(
+                                        modifier = Modifier.weight(1f).height(44.dp),
+                                        shape = RoundedCornerShape(14.dp),
+                                        onClick = viewModel::dismissUpdateDialog
+                                    ) {
+                                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                            GlassText("Later", fontWeight = FontWeight.SemiBold)
+                                        }
+                                    }
+                                    val actionLabel = when (st) {
+                                        is UpdateStatus.Downloading -> "Downloading..."
+                                        is UpdateStatus.ReadyToInstall -> "Install Now"
+                                        else -> "Update Now"
+                                    }
+                                    val canTap = st !is UpdateStatus.Downloading
+                                    Box(
+                                        modifier = Modifier
+                                            .weight(1.3f)
+                                            .height(44.dp)
+                                            .clip(RoundedCornerShape(14.dp))
+                                            .background(if (canTap) p.accent else p.secondaryKeySurface)
+                                            .clickable(enabled = canTap) {
+                                                when (st) {
+                                                    is UpdateStatus.Available -> viewModel.downloadAndInstallUpdate(context)
+                                                    is UpdateStatus.ReadyToInstall -> viewModel.installReadyApk(context)
+                                                    else -> Unit
+                                                }
+                                            },
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        GlassText(
+                                            text = actionLabel,
+                                            color = if (canTap) p.onAccent else p.textSecondary,
+                                            fontWeight = FontWeight.SemiBold
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else -> Unit
             }
         }
 

@@ -82,5 +82,7 @@ data class AppSettings(
     val lastMode: CalculatorMode = CalculatorMode.STANDARD,
     val memoryValue: String = "0",
     val memorySlots: List<String> = emptyList(),
-    val lastAnswer: String = "0"
+    val lastAnswer: String = "0",
+    val autoCheckUpdates: Boolean = true,
+    val lastUpdateCheckMillis: Long = 0L
 )
