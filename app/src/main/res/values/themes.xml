@@ -1,8 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.LiquidGlassCalculator" parent="android:Theme.DeviceDefault.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Used by SplashActivity. Pure black window, no system icon, then hands over to the animated splash content. -->
+    <style name="Theme.EryxCalc.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/eryx_black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_empty</item>
+        <item name="postSplashScreenTheme">@style/Theme.EryxCalc.SplashContent</item>
+    </style>
+
+    <style name="Theme.EryxCalc.SplashContent" parent="android:Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@color/eryx_black</item>
+        <item name="android:statusBarColor">@color/eryx_black</item>
+        <item name="android:navigationBarColor">@color/eryx_black</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 </resources>

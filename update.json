@@ -1,7 +1,7 @@
 {
-  "versionCode": 3,
-  "versionName": "1.0.2",
-  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/raw/main/eryx-v1.0.2.apk",
-  "releaseNotes": "True AMOLED pure black (#000000) Dark Mode with obsidian Liquid Glass styling.",
-  "fileSizeBytes": 2031459
+  "versionCode": 4,
+  "versionName": "1.0.3",
+  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/raw/main/eryx-v1.0.3.apk",
+  "releaseNotes": "Added custom animated Eryx Calc splash screen.",
+  "fileSizeBytes": 2060060
 }

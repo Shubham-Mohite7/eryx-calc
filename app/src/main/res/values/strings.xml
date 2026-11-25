@@ -2,4 +2,8 @@
     <string name="app_name">eryx</string>
     <string name="widget_name">eryx</string>
     <string name="widget_description">Quick calculations and instant access to Standard, Scientific, Converter, and History modes.</string>
+    <string name="splash_wordmark_a">"Eryx "</string>
+    <string name="splash_wordmark_b">Calc</string>
+    <string name="splash_tagline">Simple math, done fast.</string>
+    <string name="splash_version">Version %1$s</string>
 </resources>
