@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -40,6 +41,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -139,10 +141,12 @@ fun HistoryScreen(
                     textStyle = TextStyle(color = p.textPrimary, fontSize = (15f * p.textScale).sp),
                     modifier = Modifier.weight(1f),
                     decorationBox = { inner ->
-                        if (searchQuery.isEmpty()) {
-                            GlassText("Search calculations", color = p.textMuted, fontSizeSp = 15f)
+                        Box(contentAlignment = Alignment.CenterStart) {
+                            if (searchQuery.isEmpty()) {
+                                GlassText("Search calculations", color = p.textMuted, fontSizeSp = 15f)
+                            }
+                            inner()
                         }
-                        inner()
                     }
                 )
                 if (searchQuery.isNotEmpty()) {
@@ -180,20 +184,27 @@ fun HistoryScreen(
 
             if (items.isEmpty()) {
                 Box(
-                    modifier = Modifier.fillMaxSize().padding(32.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 32.dp, end = 32.dp, top = 16.dp, bottom = 88.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         GlassText(
                             text = if (searchQuery.isNotEmpty()) "No matching calculations" else "No calculation history yet",
                             fontSizeSp = 17f,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign = TextAlign.Center
                         )
                         Spacer(modifier = Modifier.height(6.dp))
                         GlassText(
                             text = "Completed calculations appear here automatically.",
                             color = p.textSecondary,
-                            fontSizeSp = 13.5f
+                            fontSizeSp = 13.5f,
+                            textAlign = TextAlign.Center
                         )
                     }
                 }
@@ -418,7 +429,7 @@ private fun SwipeableHistoryRow(
                         .width(46.dp)
                         .fillMaxHeight()
                         .clip(RoundedCornerShape(14.dp))
-                        .background(p.operatorKeySurface)
+                        .background(p.secondaryKeySurface)
                         .clickable {
                             offsetX = 0f
                             onCopy()
@@ -431,7 +442,7 @@ private fun SwipeableHistoryRow(
                         .width(46.dp)
                         .fillMaxHeight()
                         .clip(RoundedCornerShape(14.dp))
-                        .background(p.operatorKeySurface)
+                        .background(p.secondaryKeySurface)
                         .clickable {
                             offsetX = 0f
                             onEdit()
@@ -504,6 +515,8 @@ private fun SwipeableHistoryRow(
                     BasicText(
                         text = item.result,
                         maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.widthIn(max = 160.dp),
                         style = TextStyle(
                             color = p.textPrimary,
                             fontSize = (17f * p.textScale).sp,

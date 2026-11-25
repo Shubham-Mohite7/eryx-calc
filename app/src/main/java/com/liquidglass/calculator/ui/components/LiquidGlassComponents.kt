@@ -45,6 +45,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -407,39 +408,38 @@ fun GlassSubpageTopBar(
     trailing: @Composable (() -> Unit)? = null
 ) {
     val p = LocalGlassPalette.current
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .statusBarsPadding()
-            .padding(horizontal = 16.dp, vertical = 10.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 16.dp, vertical = 10.dp)
     ) {
         GlassCircleButton(
             onClick = onBack,
             contentDescription = "Back",
-            size = 40.dp
+            size = 40.dp,
+            modifier = Modifier.align(Alignment.CenterStart)
         ) {
             IconChevronLeft(p.textPrimary, 20.dp)
         }
-        Box(
-            modifier = Modifier.weight(1f),
-            contentAlignment = Alignment.Center
-        ) {
-            BasicText(
-                text = title,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    color = p.textPrimary,
-                    fontSize = (18f * p.textScale).sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-            )
-        }
+        BasicText(
+            text = title,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = TextStyle(
+                color = p.textPrimary,
+                fontSize = (18f * p.textScale).sp,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center
+            ),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 96.dp)
+        )
         if (trailing != null) {
-            trailing()
-        } else {
-            Spacer(modifier = Modifier.width(40.dp))
+            Box(modifier = Modifier.align(Alignment.CenterEnd)) {
+                trailing()
+            }
         }
     }
 }
@@ -492,7 +492,8 @@ fun GlassText(
     color: Color? = null,
     fontSizeSp: Float = 15f,
     fontWeight: FontWeight = FontWeight.Normal,
-    maxLines: Int = Int.MAX_VALUE
+    maxLines: Int = Int.MAX_VALUE,
+    textAlign: TextAlign = TextAlign.Unspecified
 ) {
     val p = LocalGlassPalette.current
     BasicText(
@@ -503,7 +504,8 @@ fun GlassText(
         style = TextStyle(
             color = color ?: p.textPrimary,
             fontSize = (fontSizeSp * p.textScale).sp,
-            fontWeight = fontWeight
+            fontWeight = fontWeight,
+            textAlign = textAlign
         )
     )
 }

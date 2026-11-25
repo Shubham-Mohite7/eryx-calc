@@ -835,7 +835,7 @@ fun AboutSettingsScreen(
                 }
             }
 
-            GlassCard(shape = RoundedCornerShape(22.dp)) {
+            GlassCard(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp)) {
                 Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     GlassText("Privacy & Performance", fontSizeSp = 15.5f, fontWeight = FontWeight.SemiBold)
                     GlassText(
@@ -846,7 +846,7 @@ fun AboutSettingsScreen(
                 }
             }
 
-            GlassCard(shape = RoundedCornerShape(22.dp)) {
+            GlassCard(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp)) {
                 Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     GlassText("Gestures & Shortcuts", fontSizeSp = 15.5f, fontWeight = FontWeight.SemiBold)
                     GlassText("• Swipe left on display to Undo, swipe right to Redo", color = p.textSecondary, fontSizeSp = 13f)
