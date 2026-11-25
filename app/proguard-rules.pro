@@ -1,0 +1,4 @@
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn java.awt.**
+-keep class com.liquidglass.calculator.widget.** { *; }

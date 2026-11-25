@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Used strictly for optional on-demand currency exchange rate updates -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:name=".CalculatorApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher_glass_light"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher_glass_light"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LiquidGlassCalculator">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <!-- Launcher Icon Style 1: Light Frosted Glass (Default) -->
+        <activity-alias
+            android:name=".LauncherGlassLight"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher_glass_light"
+            android:roundIcon="@drawable/ic_launcher_glass_light"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Launcher Icon Style 2: Dark Obsidian Glass -->
+        <activity-alias
+            android:name=".LauncherGlassDark"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher_glass_dark"
+            android:roundIcon="@drawable/ic_launcher_glass_dark"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Launcher Icon Style 3: Minimal Clear -->
+        <activity-alias
+            android:name=".LauncherMinimal"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher_minimal"
+            android:roundIcon="@drawable/ic_launcher_minimal"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Launcher Icon Style 4: Monochrome Grid -->
+        <activity-alias
+            android:name=".LauncherGrid"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher_grid"
+            android:roundIcon="@drawable/ic_launcher_grid"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Interactive Home Screen Calculator Widget -->
+        <receiver
+            android:name=".widget.CalculatorWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/calculator_widget_info" />
+        </receiver>
+    </application>
+</manifest>

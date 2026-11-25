@@ -1,0 +1,20 @@
+# eryx
+
+An offline-first, ad-free Android calculator built with Jetpack Compose and an Apple-inspired **Liquid Glass** aesthetic—featuring translucent frosted surfaces, GPU backdrop blur, solid colors without gradients, custom Canvas vector icons, and spring physics.
+
+## Features
+
+- **Standard & Scientific Modes**: Exact `BigDecimal` (`DECIMAL128`) arithmetic, implicit multiplication, smart percentage handling, `DEG`/`RAD`/`GRAD` angle modes + explicit `°` suffix, `2nd` inverse & hyperbolic trig, logs (`ln`, `log₁₀`, `log₂`), factorials/Gamma, `Ans`, `EXP`, `|x|`, and `MC`/`MR`/`M+`/`M-`/`MS` memory registers.
+- **Interactive 2D Graphing**: Multi-function plotter with pinch-to-zoom, pan, tap-to-trace `(x, y)` coordinates, value table, and parameter sliders (`a`, `b`).
+- **Unit & Currency Converter**: 12 categories (`Length`, `Weight`, `Temperature`, `Currency`, `Area`, `Volume`, `Speed`, `Time`, `Data`, `Energy`, `Pressure`, `Angle`) with 28 offline currencies and optional live ECB exchange rates (`api.frankfurter.app`).
+- **Financial Calculators**: `GST / Tax` (inclusive & exclusive + CGST/SGST), `Loan EMI`, `Discount`, `Percentage`, `Tip & Split`, and `Compound Interest`.
+- **Searchable History & Gestures**: SQLite-backed history with search, date/pinned/favorites filters, swipe-left `[Copy] [Edit] [Delete]` actions, cursor-editable expressions, swipe-left/right Undo/Redo, copy/paste, and sharing.
+- **Ergonomics & Accessibility**: One-handed thumb reachability (`Standard`, `Left Thumb`, `Right Thumb`), Light/Dark/System themes, 5 accent colors, Circular/Rounded key layouts, 4 switchable launcher icons, customizable haptics & synthesized sound click, Text-to-Speech voice results, landscape mode, and a Jetpack Glance home screen widget.
+
+## Build & Install
+
+```bash
+./gradlew testDebugUnitTest assembleDebug assembleRelease
+```
+
+Prebuilt release APK: [`eryx-v1.0.0.apk`](./eryx-v1.0.0.apk) (Android 8.0+ / API 26+, `1.9 MB`).

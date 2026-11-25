@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">eryx</string>
+    <string name="widget_name">eryx</string>
+    <string name="widget_description">Quick calculations and instant access to Standard, Scientific, Converter, and History modes.</string>
+</resources>
