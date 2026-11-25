@@ -1,7 +1,7 @@
 {
-  "versionCode": 4,
-  "versionName": "1.0.3",
-  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/raw/main/eryx-v1.0.3.apk",
-  "releaseNotes": "Added custom animated Eryx Calc splash screen.",
-  "fileSizeBytes": 2060060
+  "versionCode": 5,
+  "versionName": "1.0.4",
+  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/raw/main/eryx-v1.0.4.apk",
+  "releaseNotes": "Fixed top border clipping on the animated splash screen logo.",
+  "fileSizeBytes": 2060104
 }
