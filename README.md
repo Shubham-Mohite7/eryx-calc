@@ -9,7 +9,7 @@ An offline-first, ad-free Android calculator built with Jetpack Compose and an A
 - **Unit & Currency Converter**: 12 categories (`Length`, `Weight`, `Temperature`, `Currency`, `Area`, `Volume`, `Speed`, `Time`, `Data`, `Energy`, `Pressure`, `Angle`) with 28 offline currencies and optional live ECB exchange rates (`api.frankfurter.app`).
 - **Financial Calculators**: `GST / Tax` (inclusive & exclusive + CGST/SGST), `Loan EMI`, `Discount`, `Percentage`, `Tip & Split`, and `Compound Interest`.
 - **Searchable History & Gestures**: SQLite-backed history with search, date/pinned/favorites filters, swipe-left `[Copy] [Edit] [Delete]` actions, cursor-editable expressions, swipe-left/right Undo/Redo, copy/paste, and sharing.
-- **Ergonomics & Accessibility**: One-handed thumb reachability (`Standard`, `Left Thumb`, `Right Thumb`), Light/Dark/System themes, 5 accent colors, Circular/Rounded key layouts, 4 switchable launcher icons, customizable haptics & synthesized sound click, Text-to-Speech voice results, landscape mode, and a Jetpack Glance home screen widget.
+- **Ergonomics & Accessibility**: One-handed thumb reachability (`Standard`, `Left Thumb`, `Right Thumb`), Light/Dark/System themes, 5 accent colors, Circular/Rounded key layouts, customizable haptics & synthesized sound click, Text-to-Speech voice results, landscape mode, and a Jetpack Glance home screen widget.
 
 ## Build & Install
 
@@ -17,7 +17,7 @@ An offline-first, ad-free Android calculator built with Jetpack Compose and an A
 ./gradlew testDebugUnitTest assembleDebug assembleRelease
 ```
 
-Prebuilt release APK: [`eryx-v1.0.0.apk`](./eryx-v1.0.0.apk) (Android 8.0+ / API 26+, `1.9 MB`).
+Prebuilt release APK: [`eryx-v1.0.1.apk`](./eryx-v1.0.1.apk) (Android 8.0+ / API 26+, `1.9 MB`).
 
 ## Publishing App Updates
 

@@ -1,8 +1,6 @@
 package com.liquidglass.calculator.util
 
-import android.content.ComponentName
 import android.content.Context
-import android.content.pm.PackageManager
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
@@ -11,7 +9,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.speech.tts.TextToSpeech
-import com.liquidglass.calculator.data.AppIconStyle
 import com.liquidglass.calculator.data.HapticStrength
 import java.util.Locale
 import kotlin.math.exp
@@ -134,24 +131,5 @@ class FeedbackManager(private val context: Context) {
         tts?.shutdown()
         tts = null
         ttsReady = false
-    }
-
-    companion object {
-        fun applyAppIconStyle(context: Context, selected: AppIconStyle) {
-            val pm = context.packageManager
-            val pkg = context.packageName
-            AppIconStyle.entries.forEach { style ->
-                val state = if (style == selected) {
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                } else {
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-                }
-                pm.setComponentEnabledSetting(
-                    ComponentName(pkg, style.aliasClass),
-                    state,
-                    PackageManager.DONT_KILL_APP
-                )
-            }
-        }
     }
 }

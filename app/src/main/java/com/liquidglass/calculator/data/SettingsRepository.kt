@@ -21,7 +21,6 @@ class SettingsRepository(private val context: Context) {
     private object Keys {
         val THEME_MODE = stringPreferencesKey("theme_mode")
         val ACCENT = stringPreferencesKey("accent_option")
-        val APP_ICON = stringPreferencesKey("app_icon_style")
         val LAYOUT = stringPreferencesKey("calculator_layout")
         val ONE_HANDED = stringPreferencesKey("one_handed_mode")
         val TRANSLUCENT_UI = booleanPreferencesKey("translucent_ui")
@@ -54,7 +53,6 @@ class SettingsRepository(private val context: Context) {
         AppSettings(
             themeMode = enumOrDefault(prefs[Keys.THEME_MODE], ThemeMode.SYSTEM),
             accentOption = enumOrDefault(prefs[Keys.ACCENT], AccentOption.GRAPHITE),
-            appIconStyle = enumOrDefault(prefs[Keys.APP_ICON], AppIconStyle.GLASS_LIGHT),
             calculatorLayout = enumOrDefault(prefs[Keys.LAYOUT], CalculatorLayoutStyle.CIRCULAR),
             oneHandedMode = enumOrDefault(prefs[Keys.ONE_HANDED], OneHandedMode.FULL),
             translucentUi = prefs[Keys.TRANSLUCENT_UI] ?: true,
@@ -94,7 +92,6 @@ class SettingsRepository(private val context: Context) {
             val current = AppSettings(
                 themeMode = enumOrDefault(prefs[Keys.THEME_MODE], ThemeMode.SYSTEM),
                 accentOption = enumOrDefault(prefs[Keys.ACCENT], AccentOption.GRAPHITE),
-                appIconStyle = enumOrDefault(prefs[Keys.APP_ICON], AppIconStyle.GLASS_LIGHT),
                 calculatorLayout = enumOrDefault(prefs[Keys.LAYOUT], CalculatorLayoutStyle.CIRCULAR),
                 oneHandedMode = enumOrDefault(prefs[Keys.ONE_HANDED], OneHandedMode.FULL),
                 translucentUi = prefs[Keys.TRANSLUCENT_UI] ?: true,
@@ -123,7 +120,6 @@ class SettingsRepository(private val context: Context) {
             val updated = transform(current)
             prefs[Keys.THEME_MODE] = updated.themeMode.name
             prefs[Keys.ACCENT] = updated.accentOption.name
-            prefs[Keys.APP_ICON] = updated.appIconStyle.name
             prefs[Keys.LAYOUT] = updated.calculatorLayout.name
             prefs[Keys.ONE_HANDED] = updated.oneHandedMode.name
             prefs[Keys.TRANSLUCENT_UI] = updated.translucentUi

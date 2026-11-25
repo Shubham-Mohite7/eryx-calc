@@ -39,7 +39,6 @@ import com.liquidglass.calculator.AppDestination
 import com.liquidglass.calculator.BuildConfig
 import com.liquidglass.calculator.CalculatorViewModel
 import com.liquidglass.calculator.data.AccentOption
-import com.liquidglass.calculator.data.AppIconStyle
 import com.liquidglass.calculator.data.AppSettings
 import com.liquidglass.calculator.data.CalculatorLayoutStyle
 import com.liquidglass.calculator.data.HapticStrength
@@ -56,11 +55,9 @@ import com.liquidglass.calculator.ui.components.GlassSegmentedTextBar
 import com.liquidglass.calculator.ui.components.GlassSubpageTopBar
 import com.liquidglass.calculator.ui.components.GlassSwitch
 import com.liquidglass.calculator.ui.components.GlassText
-import com.liquidglass.calculator.ui.components.IconCalculatorBadge
 import com.liquidglass.calculator.ui.components.IconCheckmark
 import com.liquidglass.calculator.ui.components.IconChevronRight
 import com.liquidglass.calculator.ui.components.IconCloseX
-import com.liquidglass.calculator.ui.components.IconGridMode
 import com.liquidglass.calculator.ui.components.IconTrashBin
 import com.liquidglass.calculator.ui.theme.LocalGlassPalette
 import kotlin.math.roundToInt
@@ -250,60 +247,6 @@ fun AppearanceSettingsScreen(
                         selectedIndex = OneHandedMode.entries.indexOf(settings.oneHandedMode),
                         onSelect = { idx -> viewModel.setOneHandedMode(OneHandedMode.entries[idx]) }
                     )
-                }
-            }
-
-            // App Icon Selector (matching Image 2 bottom-4th)
-            GlassCard(shape = RoundedCornerShape(24.dp)) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    GlassText("App Icon", fontSizeSp = 15f, fontWeight = FontWeight.SemiBold)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        AppIconStyle.entries.forEach { style ->
-                            val selected = settings.appIconStyle == style
-                            Column(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .clip(RoundedCornerShape(16.dp))
-                                    .background(if (selected) p.activePillSurface else p.secondaryKeySurface)
-                                    .border(
-                                        width = if (selected) 1.5.dp else 0.8.dp,
-                                        color = if (selected) p.accent else p.glassBorder,
-                                        shape = RoundedCornerShape(16.dp)
-                                    )
-                                    .clickable { viewModel.setAppIconStyle(style) }
-                                    .padding(vertical = 10.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                val tileBg = when (style) {
-                                    AppIconStyle.GLASS_LIGHT -> Color(0xFFE9EEF2)
-                                    AppIconStyle.GLASS_DARK -> Color(0xFF1D2026)
-                                    AppIconStyle.MINIMAL -> Color(0xFFF7F9FB)
-                                    AppIconStyle.GRID -> Color(0xFF2B303A)
-                                }
-                                val tileFg = when (style) {
-                                    AppIconStyle.GLASS_LIGHT, AppIconStyle.MINIMAL -> Color(0xFF1D2229)
-                                    AppIconStyle.GLASS_DARK, AppIconStyle.GRID -> Color.White
-                                }
-                                Box(
-                                    modifier = Modifier
-                                        .size(38.dp)
-                                        .clip(RoundedCornerShape(11.dp))
-                                        .background(tileBg)
-                                        .border(0.8.dp, p.glassBorder, RoundedCornerShape(11.dp)),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    if (style == AppIconStyle.GRID) IconGridMode(tileFg, 18.dp)
-                                    else IconCalculatorBadge(tileFg, 18.dp)
-                                }
-                                Spacer(modifier = Modifier.height(5.dp))
-                                GlassText(style.label, fontSizeSp = 11f, fontWeight = FontWeight.Medium)
-                            }
-                        }
-                    }
                 }
             }
 
@@ -773,10 +716,44 @@ fun AboutSettingsScreen(
                         modifier = Modifier
                             .size(64.dp)
                             .clip(RoundedCornerShape(18.dp))
-                            .background(p.accent),
+                            .background(Color(0xFF1A1C1F))
+                            .padding(10.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        IconCalculatorBadge(p.onAccent, 32.dp)
+                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .clip(RoundedCornerShape(5.dp))
+                                        .background(Color(0xFF24272C)),
+                                    contentAlignment = Alignment.Center
+                                ) { GlassText("+", color = Color.White, fontSizeSp = 12f, fontWeight = FontWeight.Medium) }
+                                Box(
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .clip(RoundedCornerShape(5.dp))
+                                        .background(Color(0xFF24272C)),
+                                    contentAlignment = Alignment.Center
+                                ) { GlassText("−", color = Color.White, fontSizeSp = 12f, fontWeight = FontWeight.Medium) }
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .clip(RoundedCornerShape(5.dp))
+                                        .background(Color(0xFF24272C)),
+                                    contentAlignment = Alignment.Center
+                                ) { GlassText("×", color = Color.White, fontSizeSp = 12f, fontWeight = FontWeight.Medium) }
+                                Box(
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .clip(RoundedCornerShape(5.dp))
+                                        .background(Color(0xFFF0F2F4)),
+                                    contentAlignment = Alignment.Center
+                                ) { GlassText("=", color = Color(0xFF1A1C1F), fontSizeSp = 12f, fontWeight = FontWeight.Bold) }
+                            }
+                        }
                     }
                     Spacer(modifier = Modifier.height(12.dp))
                     GlassText("eryx", fontSizeSp = 22f, fontWeight = FontWeight.Bold)

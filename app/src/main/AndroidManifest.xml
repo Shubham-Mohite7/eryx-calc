@@ -10,9 +10,9 @@
     <application
         android:name=".CalculatorApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher_glass_light"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_launcher_glass_light"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LiquidGlassCalculator">
 
@@ -23,68 +23,9 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Launcher Icon Style 1: Light Frosted Glass (Default) -->
-        <activity-alias
-            android:name=".LauncherGlassLight"
-            android:enabled="true"
-            android:exported="true"
-            android:icon="@drawable/ic_launcher_glass_light"
-            android:roundIcon="@drawable/ic_launcher_glass_light"
-            android:label="@string/app_name"
-            android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <!-- Launcher Icon Style 2: Dark Obsidian Glass -->
-        <activity-alias
-            android:name=".LauncherGlassDark"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/ic_launcher_glass_dark"
-            android:roundIcon="@drawable/ic_launcher_glass_dark"
-            android:label="@string/app_name"
-            android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <!-- Launcher Icon Style 3: Minimal Clear -->
-        <activity-alias
-            android:name=".LauncherMinimal"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/ic_launcher_minimal"
-            android:roundIcon="@drawable/ic_launcher_minimal"
-            android:label="@string/app_name"
-            android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <!-- Launcher Icon Style 4: Monochrome Grid -->
-        <activity-alias
-            android:name=".LauncherGrid"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/ic_launcher_grid"
-            android:roundIcon="@drawable/ic_launcher_grid"
-            android:label="@string/app_name"
-            android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
 
         <!-- Interactive Home Screen Calculator Widget -->
         <receiver

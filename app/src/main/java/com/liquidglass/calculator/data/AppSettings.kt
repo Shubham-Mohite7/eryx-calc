@@ -17,13 +17,6 @@ enum class AccentOption(val label: String, val colorHex: Long) {
     EMERALD("Emerald", 0xFF10B981)
 }
 
-enum class AppIconStyle(val label: String, val aliasClass: String) {
-    GLASS_LIGHT("Frosted", "com.liquidglass.calculator.LauncherGlassLight"),
-    GLASS_DARK("Obsidian", "com.liquidglass.calculator.LauncherGlassDark"),
-    MINIMAL("Minimal", "com.liquidglass.calculator.LauncherMinimal"),
-    GRID("Grid", "com.liquidglass.calculator.LauncherGrid")
-}
-
 enum class CalculatorLayoutStyle(val label: String) {
     CIRCULAR("Circular"),
     ROUNDED("Rounded")
@@ -56,7 +49,6 @@ data class AppSettings(
     // Appearance
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val accentOption: AccentOption = AccentOption.GRAPHITE,
-    val appIconStyle: AppIconStyle = AppIconStyle.GLASS_LIGHT,
     val calculatorLayout: CalculatorLayoutStyle = CalculatorLayoutStyle.CIRCULAR,
     val oneHandedMode: OneHandedMode = OneHandedMode.FULL,
     val translucentUi: Boolean = true,

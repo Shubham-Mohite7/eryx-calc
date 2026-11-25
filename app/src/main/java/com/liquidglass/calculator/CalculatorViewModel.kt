@@ -10,7 +10,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.liquidglass.calculator.data.AccentOption
-import com.liquidglass.calculator.data.AppIconStyle
 import com.liquidglass.calculator.data.AppSettings
 import com.liquidglass.calculator.data.CalculatorLayoutStyle
 import com.liquidglass.calculator.data.CalculatorMode
@@ -818,10 +817,6 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
 
     fun setThemeMode(mode: ThemeMode) = updateSettings { it.copy(themeMode = mode) }
     fun setAccentOption(accent: AccentOption) = updateSettings { it.copy(accentOption = accent) }
-    fun setAppIconStyle(style: AppIconStyle) {
-        updateSettings { it.copy(appIconStyle = style) }
-        FeedbackManager.applyAppIconStyle(getApplication(), style)
-    }
     fun setCalculatorLayout(layout: CalculatorLayoutStyle) = updateSettings { it.copy(calculatorLayout = layout) }
     fun setOneHandedMode(mode: OneHandedMode) = updateSettings { it.copy(oneHandedMode = mode) }
     fun setTranslucentUi(enabled: Boolean) = updateSettings { it.copy(translucentUi = enabled) }
