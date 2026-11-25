@@ -12,36 +12,17 @@
 
 <br><br>
 
-<img src="https://img.shields.io/badge/version-1.0.6-1C1C1E?style=for-the-badge&labelColor=000000" alt="Version 1.0.6">
-<img src="https://img.shields.io/badge/Android-8.0%2B-1C1C1E?style=for-the-badge&logo=android&logoColor=white&labelColor=000000" alt="Android 8.0 or later">
-<img src="https://img.shields.io/badge/size-2.0%20MB-1C1C1E?style=for-the-badge&labelColor=000000" alt="2.0 MB">
-<img src="https://img.shields.io/badge/ads-0-1C1C1E?style=for-the-badge&labelColor=000000" alt="Zero ads">
-
-<br><br>
-
-**[Website](https://eryx-app-tau.vercel.app/)**  ·  **[Download](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk)**  ·  **[Privacy](https://eryx-app-tau.vercel.app/privacy)**
+[Features](#features)  ·  [Install](#install)  ·  [Privacy](#privacy)  ·  [Website](https://eryx-app-tau.vercel.app/)
 
 </div>
 
 <img src="assets/divider.svg" alt="" width="100%">
 
-## What is eryx?
+## About
 
-**eryx** is a free Android calculator that stays out of your way. It works fully offline, shows no ads, needs no account and fits in about 2 MB. Under the clean black interface you get a scientific keyboard, function graphing, unit and currency converters, and everyday finance tools like GST and loan EMI.
+**eryx** is a free Android calculator that stays out of your way. It works fully offline, shows no ads, needs no account and fits in about 2 MB. You get a scientific keyboard, graphing, unit and currency converters, and finance tools like GST and loan EMI, plus a home screen widget.
 
 <img src="assets/stats.svg" alt="12 unit categories, 28 offline currencies, 0 ads ever, 2.0 MB app size" width="100%">
-
-## Screens
-
-<p align="center">
-  <img src="https://eryx-app-tau.vercel.app/assets/standard.webp" alt="Standard mode" width="18%">
-  <img src="https://eryx-app-tau.vercel.app/assets/scientific.webp" alt="Scientific mode" width="18%">
-  <img src="https://eryx-app-tau.vercel.app/assets/graph.webp" alt="Graphing" width="18%">
-  <img src="https://eryx-app-tau.vercel.app/assets/converter.webp" alt="Converter" width="18%">
-  <img src="https://eryx-app-tau.vercel.app/assets/financial.webp" alt="Financial calculators" width="18%">
-</p>
-
-<p align="center"><sub>Standard  ·  Scientific  ·  Graph  ·  Converter  ·  Financial</sub></p>
 
 ## Features
 
@@ -58,22 +39,26 @@
   </tr>
 </table>
 
-Also included: a home screen **widget**, full **offline** operation and **ad-free** use.
-
 <img src="assets/divider.svg" alt="" width="100%">
 
 ## Install
 
-1. Download the latest APK: **[eryx-v1.0.6.apk](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk)** (2.0 MB).
-2. If your browser warns about APK files, choose **Download anyway**.
-3. Open the downloaded file and allow installs from this source when Android asks.
-4. Launch **eryx** and start calculating.
+1. Download **[eryx-v1.0.6.apk](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk)** (2.0 MB, Android 8.0 or later).
+2. Open the file and allow installs from this source when Android asks.
+3. Launch **eryx**.
 
-**Requirements:** Android 8.0 or later.
+<details>
+<summary>Browser shows a warning about the APK?</summary>
+
+<br>
+
+That is normal for apps installed outside the Play Store. Choose **Download anyway**, then open the file to install.
+
+</details>
 
 ## Privacy
 
-eryx has no ads, no tracking and no account. Your calculation history stays on your phone. Currency rates work offline with 28 bundled currencies, and live rates are optional. Read the full [privacy policy](https://eryx-app-tau.vercel.app/privacy).
+No ads, no tracking, no account. Your history stays on your phone, and currency rates work offline with live rates as an option. Read the full [privacy policy](https://eryx-app-tau.vercel.app/privacy).
 
 ## Feedback
 
