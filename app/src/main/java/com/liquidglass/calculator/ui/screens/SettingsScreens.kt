@@ -1,5 +1,7 @@
 package com.liquidglass.calculator.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -836,13 +838,40 @@ fun AboutSettingsScreen(
             }
 
             GlassCard(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(22.dp)) {
-                Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     GlassText("Privacy & Performance", fontSizeSp = 15.5f, fontWeight = FontWeight.SemiBold)
                     GlassText(
-                        "100% free, ad-free, offline-first, and zero tracking. Internet access is used solely when you request live ECB currency exchange rates.",
+                        "100% free, ad-free, offline-first, and zero tracking. Internet access is used solely when you request live ECB currency exchange rates or check for app updates.",
                         color = p.textSecondary,
                         fontSizeSp = 13.5f
                     )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(p.secondaryKeySurface)
+                            .border(0.75.dp, p.glassBorder, RoundedCornerShape(14.dp))
+                            .clickable {
+                                runCatching {
+                                    val intent = Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("https://github.com/Shubham-Mohite7/eryx-calc/blob/main/privacy.md")
+                                    )
+                                    context.startActivity(intent)
+                                }
+                            }
+                            .padding(horizontal = 14.dp, vertical = 10.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        GlassText(
+                            "View Privacy Policy",
+                            color = p.accent,
+                            fontSizeSp = 13.5f,
+                            fontWeight = FontWeight.Medium
+                        )
+                        IconChevronRight(p.textSecondary, 16.dp)
+                    }
                 }
             }
 

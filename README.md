@@ -17,7 +17,11 @@ An offline-first, ad-free Android calculator built with Jetpack Compose and an A
 ./gradlew testDebugUnitTest assembleDebug assembleRelease
 ```
 
-Prebuilt release APK: [`eryx-v1.0.5.apk`](./eryx-v1.0.5.apk) (Android 8.0+ / API 26+, `2.0 MB`).
+Prebuilt release APK: [`eryx-v1.0.6.apk`](./eryx-v1.0.6.apk) (Android 8.0+ / API 26+, `2.0 MB`).
+
+## Privacy
+
+`eryx` collects zero analytics, telemetry, or personal data. Read the full policy in [`privacy.md`](./privacy.md).
 
 ## Publishing App Updates
 

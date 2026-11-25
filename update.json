@@ -1,7 +1,7 @@
 {
-  "versionCode": 6,
-  "versionName": "1.0.5",
-  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/raw/main/eryx-v1.0.5.apk",
-  "releaseNotes": "Fixed History screen sentence alignment and centered top bar title.",
+  "versionCode": 7,
+  "versionName": "1.0.6",
+  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/raw/main/eryx-v1.0.6.apk",
+  "releaseNotes": "Added privacy.md policy documentation and an in-app View Privacy Policy link in About & Updates.",
   "fileSizeBytes": 2060104
 }
