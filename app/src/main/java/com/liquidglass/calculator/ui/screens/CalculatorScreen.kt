@@ -479,9 +479,9 @@ private fun CalculatorDisplayCard(
                 .padding(horizontal = 18.dp, vertical = 14.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // Top strip inside display: status badges + Undo/Redo (does not squeeze expression width)
+            // Top bar inside display: status badges + Undo/Redo + Editable Expression
             Row(
-                modifier = Modifier.fillMaxWidth().height(28.dp),
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -544,65 +544,43 @@ private fun CalculatorDisplayCard(
                         }
                     }
                 }
-            }
 
-            // Full-width editable typed expression (large, crisp, auto-scaling)
-            val exprLen = calcState.expressionField.text.length
-            val isSci = settings.lastMode == CalculatorMode.SCIENTIFIC
-            val exprFontSize = when {
-                settings.expressionInMainDisplay -> when {
-                    exprLen <= 10 -> 40f
-                    exprLen <= 16 -> 32f
-                    else -> 25f
-                }
-                calcState.justEvaluated -> when {
-                    exprLen <= 16 -> 24f
-                    else -> 20f
-                }
-                isSci -> when {
-                    exprLen <= 12 -> 28f
-                    exprLen <= 20 -> 23f
-                    else -> 19f
-                }
-                else -> when {
-                    exprLen <= 10 -> 36f
-                    exprLen <= 16 -> 30f
-                    exprLen <= 24 -> 25f
-                    else -> 21f
-                }
-            }
-            @Suppress("DEPRECATION")
-            CompositionLocalProvider(LocalTextInputService provides null) {
-                BasicTextField(
-                    value = calcState.expressionField,
-                    onValueChange = onExpressionChange,
-                    singleLine = true,
-                    cursorBrush = SolidColor(p.accent),
-                    textStyle = TextStyle(
-                        color = if (!calcState.justEvaluated || settings.expressionInMainDisplay) p.textPrimary else p.textSecondary,
-                        fontSize = (exprFontSize * p.textScale).sp,
-                        fontWeight = if (!calcState.justEvaluated || settings.expressionInMainDisplay) FontWeight.SemiBold else FontWeight.Medium,
-                        textAlign = TextAlign.End,
-                        fontFeatureSettings = "tnum"
-                    ),
-                    modifier = Modifier.fillMaxWidth(),
-                    decorationBox = { innerTextField ->
-                        Box(contentAlignment = Alignment.CenterEnd) {
-                            if (calcState.expressionField.text.isEmpty()) {
-                                BasicText(
-                                    text = "0",
-                                    style = TextStyle(
-                                        color = p.textMuted,
-                                        fontSize = (exprFontSize * p.textScale).sp,
-                                        fontWeight = FontWeight.Medium,
-                                        textAlign = TextAlign.End
+                // Editable expression field (suppresses soft IME keyboard so calculator keypad stays clean)
+                val exprFontSize = if (settings.expressionInMainDisplay) 26f else 18f
+                @Suppress("DEPRECATION")
+                CompositionLocalProvider(LocalTextInputService provides null) {
+                    BasicTextField(
+                        value = calcState.expressionField,
+                        onValueChange = onExpressionChange,
+                        singleLine = true,
+                        cursorBrush = SolidColor(p.accent),
+                        textStyle = TextStyle(
+                            color = if (settings.expressionInMainDisplay) p.textPrimary else p.textSecondary,
+                            fontSize = (exprFontSize * p.textScale).sp,
+                            fontWeight = if (settings.expressionInMainDisplay) FontWeight.SemiBold else FontWeight.Medium,
+                            textAlign = TextAlign.End,
+                            fontFeatureSettings = "tnum"
+                        ),
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 10.dp),
+                        decorationBox = { innerTextField ->
+                            Box(contentAlignment = Alignment.CenterEnd) {
+                                if (calcState.expressionField.text.isEmpty()) {
+                                    BasicText(
+                                        text = "0",
+                                        style = TextStyle(
+                                            color = p.textMuted,
+                                            fontSize = (exprFontSize * p.textScale).sp,
+                                            textAlign = TextAlign.End
+                                        )
                                     )
-                                )
+                                }
+                                innerTextField()
                             }
-                            innerTextField()
                         }
-                    }
-                )
+                    )
+                }
             }
 
             // Bottom row inside display: [⛶] Expand/Graph + Reachability pill on left, large tabular Result on right
@@ -659,11 +637,6 @@ private fun CalculatorDisplayCard(
                 val len = displayString.length
                 val baseSize = when {
                     settings.expressionInMainDisplay -> 24f
-                    !calcState.justEvaluated && calcState.expressionField.text.isNotEmpty() -> when {
-                        len <= 9 -> 32f
-                        len <= 14 -> 26f
-                        else -> 22f
-                    }
                     len <= 7 -> 48f
                     len <= 10 -> 38f
                     len <= 14 -> 30f
@@ -686,11 +659,7 @@ private fun CalculatorDisplayCard(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyle(
-                            color = when {
-                                calcState.errorMessage != null -> p.danger
-                                !calcState.justEvaluated && !settings.expressionInMainDisplay && calcState.expressionField.text.isNotEmpty() -> p.textSecondary
-                                else -> p.textPrimary
-                            },
+                            color = if (calcState.errorMessage != null) p.danger else p.textPrimary,
                             fontSize = (baseSize * p.textScale).sp,
                             fontWeight = FontWeight.SemiBold,
                             textAlign = TextAlign.End,
