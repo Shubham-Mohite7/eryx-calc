@@ -845,32 +845,34 @@ fun AboutSettingsScreen(
                         color = p.textSecondary,
                         fontSizeSp = 13.5f
                     )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(p.secondaryKeySurface)
-                            .border(0.75.dp, p.glassBorder, RoundedCornerShape(14.dp))
-                            .clickable {
-                                runCatching {
-                                    val intent = Intent(
-                                        Intent.ACTION_VIEW,
-                                        Uri.parse("https://github.com/Shubham-Mohite7/eryx-calc/blob/main/privacy.md")
-                                    )
-                                    context.startActivity(intent)
+                    val docLinks = listOf(
+                        "View Privacy Policy" to "https://github.com/Shubham-Mohite7/eryx-calc/blob/main/privacy.md",
+                        "Open-Source License (MIT)" to "https://github.com/Shubham-Mohite7/eryx-calc/blob/main/LICENSE"
+                    )
+                    docLinks.forEach { (label, url) ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(14.dp))
+                                .background(p.secondaryKeySurface)
+                                .border(0.75.dp, p.glassBorder, RoundedCornerShape(14.dp))
+                                .clickable {
+                                    runCatching {
+                                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                                    }
                                 }
-                            }
-                            .padding(horizontal = 14.dp, vertical = 10.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        GlassText(
-                            "View Privacy Policy",
-                            color = p.accent,
-                            fontSizeSp = 13.5f,
-                            fontWeight = FontWeight.Medium
-                        )
-                        IconChevronRight(p.textSecondary, 16.dp)
+                                .padding(horizontal = 14.dp, vertical = 10.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            GlassText(
+                                label,
+                                color = p.accent,
+                                fontSizeSp = 13.5f,
+                                fontWeight = FontWeight.Medium
+                            )
+                            IconChevronRight(p.textSecondary, 16.dp)
+                        }
                     }
                 }
             }

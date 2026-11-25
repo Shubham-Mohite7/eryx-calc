@@ -4,11 +4,11 @@
   <img src="assets/banner.svg" alt="eryx — The calculator, refined." width="100%">
 </a>
 
-<a href="https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk">
+<a href="https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.7.apk">
   <img src="assets/download.svg" alt="Download eryx APK" width="200">
 </a>
 
-<sub>[Features](#features)  ·  [Install](#install)  ·  [Privacy](#privacy)  ·  [Website](https://eryx-app-tau.vercel.app/)</sub>
+<sub>[Features](#features)  ·  [Install](#install)  ·  [Privacy](#privacy)  ·  [License](#license)  ·  [Website](https://eryx-app-tau.vercel.app/)</sub>
 
 </div>
 
@@ -39,7 +39,7 @@
 
 ## Install
 
-1. Download **[eryx-v1.0.6.apk](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk)** (2.0 MB, Android 8.0 or later).
+1. Download **[eryx-v1.0.7.apk](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.7.apk)** (2.0 MB, Android 8.0 or later).
 2. Open the file and allow installs from this source when Android asks.
 3. Launch **eryx**.
 
@@ -55,6 +55,10 @@ That is normal for apps installed outside the Play Store. Choose **Download anyw
 ## Privacy
 
 No ads, no tracking, no account. Your history stays on your phone, and currency rates work offline with live rates as an option. Read the full [privacy policy](https://eryx-app-tau.vercel.app/privacy).
+
+## License
+
+Licensed under the [MIT License](./LICENSE).
 
 ## Feedback
 
