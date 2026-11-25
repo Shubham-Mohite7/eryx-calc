@@ -840,7 +840,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     // ---- In-App Updates ----
 
     fun checkForUpdates(manual: Boolean = true) {
-        if (_updateStatus.value is UpdateStatus.Checking || _updateStatus.value is UpdateStatus.Downloading) return
+        if (_updateStatus.value is UpdateStatus.Checking) return
         viewModelScope.launch {
             _updateStatus.value = UpdateStatus.Checking
             val res = updateRepo.checkForUpdate(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME)
@@ -866,38 +866,10 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun downloadAndInstallUpdate(context: Context) {
-        val info = when (val st = _updateStatus.value) {
-            is UpdateStatus.Available -> st.info
-            is UpdateStatus.Error -> return
-            else -> return
-        }
-        viewModelScope.launch {
-            _updateStatus.value = UpdateStatus.Downloading(info, 0f)
-            val result = updateRepo.downloadApk(info) { prog ->
-                _updateStatus.value = UpdateStatus.Downloading(info, prog)
-            }
-            result.fold(
-                onSuccess = { apkFile ->
-                    _updateStatus.value = UpdateStatus.ReadyToInstall(info, apkFile)
-                    installReadyApk(context)
-                },
-                onFailure = { err ->
-                    _updateStatus.value = UpdateStatus.Error(err.message ?: "Download failed")
-                    showToast("Update download failed")
-                }
-            )
-        }
-    }
-
-    fun installReadyApk(context: Context) {
-        val ready = _updateStatus.value as? UpdateStatus.ReadyToInstall ?: return
-        if (updateRepo.needsInstallPermission()) {
-            showToast("Allow 'Install unknown apps' for eryx, then tap Install")
-            updateRepo.openInstallPermissionSettings(context)
-        } else {
-            updateRepo.launchApkInstaller(context, ready.apkFile)
-        }
+    fun openUpdateInBrowser(context: Context) {
+        val available = _updateStatus.value as? UpdateStatus.Available ?: return
+        updateRepo.openUpdateDownload(context, available.info)
+        _showUpdateDialog.value = false
     }
 
     fun dismissUpdateDialog() {

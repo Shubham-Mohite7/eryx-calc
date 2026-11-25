@@ -118,7 +118,6 @@ fun SettingsMainScreen(
 
             val aboutSubtitle = when (updateStatus) {
                 is UpdateStatus.Available -> "Update v${updateStatus.info.versionName} available"
-                is UpdateStatus.ReadyToInstall -> "Update ready to install"
                 else -> "Offline-first • v${BuildConfig.VERSION_NAME} • Check updates"
             }
             SettingsNavRow(
@@ -772,38 +771,16 @@ fun AboutSettingsScreen(
                         UpdateStatus.Checking -> "Checking for updates..."
                         is UpdateStatus.UpToDate -> "You're on the latest version (v${BuildConfig.VERSION_NAME})."
                         is UpdateStatus.Available -> "Version ${updateStatus.info.versionName} is available!\n${updateStatus.info.releaseNotes}"
-                        is UpdateStatus.Downloading -> "Downloading v${updateStatus.info.versionName} (${(updateStatus.progress * 100).toInt()}%)..."
-                        is UpdateStatus.ReadyToInstall -> "v${updateStatus.info.versionName} downloaded and ready to install."
                         is UpdateStatus.Error -> updateStatus.message
                     }
                     GlassText(statusText, color = p.textSecondary, fontSizeSp = 13.5f)
 
-                    if (updateStatus is UpdateStatus.Downloading) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(6.dp)
-                                .clip(RoundedCornerShape(999.dp))
-                                .background(p.switchTrackOff)
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth(updateStatus.progress.coerceIn(0.05f, 1f))
-                                    .height(6.dp)
-                                    .clip(RoundedCornerShape(999.dp))
-                                    .background(p.accent)
-                            )
-                        }
-                    }
-
                     val btnLabel = when (updateStatus) {
                         UpdateStatus.Checking -> "Checking..."
-                        is UpdateStatus.Available -> "Download & Install v${updateStatus.info.versionName}"
-                        is UpdateStatus.Downloading -> "Downloading ${(updateStatus.progress * 100).toInt()}%"
-                        is UpdateStatus.ReadyToInstall -> "Install Update Now"
+                        is UpdateStatus.Available -> "Download v${updateStatus.info.versionName} in Browser"
                         else -> "Check for Updates"
                     }
-                    val enabled = updateStatus !is UpdateStatus.Checking && updateStatus !is UpdateStatus.Downloading
+                    val enabled = updateStatus !is UpdateStatus.Checking
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -812,8 +789,7 @@ fun AboutSettingsScreen(
                             .background(if (enabled) p.accent else p.secondaryKeySurface)
                             .clickable(enabled = enabled) {
                                 when (updateStatus) {
-                                    is UpdateStatus.Available -> viewModel.downloadAndInstallUpdate(context)
-                                    is UpdateStatus.ReadyToInstall -> viewModel.installReadyApk(context)
+                                    is UpdateStatus.Available -> viewModel.openUpdateInBrowser(context)
                                     else -> viewModel.checkForUpdates(manual = true)
                                 }
                             },

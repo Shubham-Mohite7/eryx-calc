@@ -20,7 +20,6 @@ All app data stays strictly on your device inside the private Android app sandbo
 
 - **Calculation History:** Stored locally on your device (SQLite) so you can revisit or clear past calculations at any time.
 - **Preferences & Settings:** Theme mode, number formatting, haptic feedback, and cached currency conversion rates are stored locally via Android DataStore / SharedPreferences.
-- **Downloaded Updates:** When you choose to download an app update from within **About & Updates**, the installer APK is temporarily saved to the app's private cache directory before launching Android's system package installer.
 
 You can clear calculation history inside the app at any time, or delete all local app data by uninstalling eryx or clearing storage in Android Settings.
 
@@ -34,8 +33,8 @@ eryx works completely offline for calculations, scientific functions, history, a
    - When you open the Currency Converter or request a rate refresh, eryx fetches public ECB exchange rate data from the Frankfurter API (`https://api.frankfurter.app`).
    - No personal or device-identifying information is sent beyond standard HTTP request headers required to retrieve the exchange rate response.
 
-2. **In-App Update Checks**
-   - When you check for updates (or view update availability in **About & Updates**), eryx fetches version metadata (`update.json`) and/or release information from the official GitHub repository (`https://github.com/Shubham-Mohite7/eryx-calc`) and downloads the APK from GitHub when you tap to install an update.
+2. **Update Availability Checks**
+   - When you check for updates (or view update availability in **About & Updates**), eryx fetches version metadata (`update.json`) and/or release metadata from the official GitHub repository (`https://github.com/Shubham-Mohite7/eryx-calc`), and opens the GitHub release/APK download page in your system browser when you tap to download.
    - Please refer to [GitHub's Privacy Statement](https://docs.github.com/en/site-privacy/privacy-policies/github-general-privacy-statement) for how GitHub handles standard web/API requests.
 
 ---
@@ -46,10 +45,9 @@ eryx requests only the minimal permissions required for its features:
 
 | Permission | Purpose |
 | --- | --- |
-| `INTERNET` | Fetch live currency exchange rates and check/download user-requested app updates. |
+| `INTERNET` | Fetch live currency exchange rates and check GitHub release metadata for app updates. |
 | `ACCESS_NETWORK_STATE` | Check whether the device has an active network connection before attempting currency or update requests. |
 | `VIBRATE` | Provide optional tactile haptic feedback on keypad presses (can be disabled in Settings). |
-| `REQUEST_INSTALL_PACKAGES` | Allow Android's system installer to install a newer eryx APK downloaded via the built-in updater. |
 
 ---
 

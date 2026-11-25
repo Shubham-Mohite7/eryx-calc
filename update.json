@@ -1,7 +1,7 @@
 {
-  "versionCode": 8,
-  "versionName": "1.0.7",
-  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/raw/main/eryx-v1.0.7.apk",
-  "releaseNotes": "Added MIT LICENSE to the repository and an in-app Open-Source License (MIT) link in About & Updates.",
-  "fileSizeBytes": 2060104
+  "versionCode": 9,
+  "versionName": "1.0.8",
+  "apkUrl": "https://github.com/Shubham-Mohite7/eryx-calc/releases/download/v1.0.8/eryx-v1.0.8.apk",
+  "releaseNotes": "Signed with a dedicated release certificate and removed REQUEST_INSTALL_PACKAGES to prevent Play Protect warnings; updates open cleanly in your browser.",
+  "fileSizeBytes": 2059660
 }

@@ -231,75 +231,36 @@ private fun CalculatorRoot(viewModel: CalculatorViewModel) {
         if (showUpdateDialog) {
             val p = LocalGlassPalette.current
             when (val st = updateStatus) {
-                is UpdateStatus.Available,
-                is UpdateStatus.Downloading,
-                is UpdateStatus.ReadyToInstall -> {
-                    val info = when (st) {
-                        is UpdateStatus.Available -> st.info
-                        is UpdateStatus.Downloading -> st.info
-                        is UpdateStatus.ReadyToInstall -> st.info
-                        else -> null
-                    }
-                    if (info != null) {
-                        GlassModalCardDialog(onDismiss = viewModel::dismissUpdateDialog) {
-                            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                                GlassText("Update Available • v${info.versionName}", fontSizeSp = 18f, fontWeight = FontWeight.SemiBold)
-                                GlassText(info.releaseNotes, color = p.textSecondary, fontSizeSp = 13.5f)
-                                if (st is UpdateStatus.Downloading) {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(6.dp)
-                                            .clip(RoundedCornerShape(999.dp))
-                                            .background(p.switchTrackOff)
-                                    ) {
-                                        Box(
-                                            modifier = Modifier
-                                                .fillMaxWidth(st.progress.coerceIn(0.05f, 1f))
-                                                .height(6.dp)
-                                                .clip(RoundedCornerShape(999.dp))
-                                                .background(p.accent)
-                                        )
+                is UpdateStatus.Available -> {
+                    val info = st.info
+                    GlassModalCardDialog(onDismiss = viewModel::dismissUpdateDialog) {
+                        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            GlassText("Update Available • v${info.versionName}", fontSizeSp = 18f, fontWeight = FontWeight.SemiBold)
+                            GlassText(info.releaseNotes, color = p.textSecondary, fontSizeSp = 13.5f)
+                            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                GlassCard(
+                                    modifier = Modifier.weight(1f).height(44.dp),
+                                    shape = RoundedCornerShape(14.dp),
+                                    onClick = viewModel::dismissUpdateDialog
+                                ) {
+                                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                        GlassText("Later", fontWeight = FontWeight.SemiBold)
                                     }
-                                    GlassText("Downloading ${(st.progress * 100).toInt()}%...", color = p.textSecondary, fontSizeSp = 12.5f)
                                 }
-                                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                                    GlassCard(
-                                        modifier = Modifier.weight(1f).height(44.dp),
-                                        shape = RoundedCornerShape(14.dp),
-                                        onClick = viewModel::dismissUpdateDialog
-                                    ) {
-                                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                            GlassText("Later", fontWeight = FontWeight.SemiBold)
-                                        }
-                                    }
-                                    val actionLabel = when (st) {
-                                        is UpdateStatus.Downloading -> "Downloading..."
-                                        is UpdateStatus.ReadyToInstall -> "Install Now"
-                                        else -> "Update Now"
-                                    }
-                                    val canTap = st !is UpdateStatus.Downloading
-                                    Box(
-                                        modifier = Modifier
-                                            .weight(1.3f)
-                                            .height(44.dp)
-                                            .clip(RoundedCornerShape(14.dp))
-                                            .background(if (canTap) p.accent else p.secondaryKeySurface)
-                                            .clickable(enabled = canTap) {
-                                                when (st) {
-                                                    is UpdateStatus.Available -> viewModel.downloadAndInstallUpdate(context)
-                                                    is UpdateStatus.ReadyToInstall -> viewModel.installReadyApk(context)
-                                                    else -> Unit
-                                                }
-                                            },
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        GlassText(
-                                            text = actionLabel,
-                                            color = if (canTap) p.onAccent else p.textSecondary,
-                                            fontWeight = FontWeight.SemiBold
-                                        )
-                                    }
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1.3f)
+                                        .height(44.dp)
+                                        .clip(RoundedCornerShape(14.dp))
+                                        .background(p.accent)
+                                        .clickable { viewModel.openUpdateInBrowser(context) },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    GlassText(
+                                        text = "Download Update",
+                                        color = p.onAccent,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
                                 }
                             }
                         }

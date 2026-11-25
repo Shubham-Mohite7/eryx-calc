@@ -4,7 +4,7 @@
   <img src="assets/banner.svg" alt="eryx — The calculator, refined." width="100%">
 </a>
 
-<a href="https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.7.apk">
+<a href="https://github.com/Shubham-Mohite7/eryx-calc/releases/download/v1.0.8/eryx-v1.0.8.apk">
   <img src="assets/download.svg" alt="Download eryx APK" width="200">
 </a>
 
@@ -39,9 +39,10 @@
 
 ## Install
 
-1. Download **[eryx-v1.0.7.apk](https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.7.apk)** (2.0 MB, Android 8.0 or later).
-2. Open the file and allow installs from this source when Android asks.
-3. Launch **eryx**.
+1. Download **[eryx-v1.0.8.apk](https://github.com/Shubham-Mohite7/eryx-calc/releases/download/v1.0.8/eryx-v1.0.8.apk)** (2.0 MB, Android 8.0 or later).
+2. If upgrading from `v1.0.7` or earlier (which used the test debug key), uninstall the older version once before installing `v1.0.8+`.
+3. Open the file and allow installs from your browser when Android asks.
+4. Launch **eryx**.
 
 <details>
 <summary>Browser shows a warning about the APK?</summary>
