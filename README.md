@@ -4,15 +4,11 @@
   <img src="assets/banner.svg" alt="eryx — The calculator, refined." width="100%">
 </a>
 
-<br>
-
 <a href="https://github.com/Shubham-Mohite7/eryx-calc/raw/refs/heads/main/eryx-v1.0.6.apk">
-  <img src="assets/download.svg" alt="Download eryx APK" width="320">
+  <img src="assets/download.svg" alt="Download eryx APK" width="200">
 </a>
 
-<br><br>
-
-[Features](#features)  ·  [Install](#install)  ·  [Privacy](#privacy)  ·  [Website](https://eryx-app-tau.vercel.app/)
+<sub>[Features](#features)  ·  [Install](#install)  ·  [Privacy](#privacy)  ·  [Website](https://eryx-app-tau.vercel.app/)</sub>
 
 </div>
 
